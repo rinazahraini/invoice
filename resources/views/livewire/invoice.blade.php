@@ -14,6 +14,7 @@
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
                 <div
                     class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+                    <a href="{{url('form-invoice')}}" class="px-5 py-2 border-green-500 border text-green-500 rounded transition duration-300 hover:bg-green-700 hover:text-white focus:outline-none">Add</a>
                     <table class="min-w-full">
                         <thead>
                             <tr>
@@ -29,6 +30,9 @@
                                 <th
                                     class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                                     Issue Date</th>
+                                <th
+                                    class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+                                    View</th>
                                 <th
                                     class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                                     Option</th>
@@ -53,7 +57,8 @@
                                         class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
                                             class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative text-xs">{{Date::parse($item->due_date)->format('d F Y')}}</span>
+                                        <span
+                                            class="relative text-xs">{{Date::parse($item->due_date)->format('d F Y')}}</span>
                                     </span>
                                 </td>
                                 <td
@@ -62,18 +67,26 @@
                                         class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
                                             class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative text-xs">{{Date::parse($item->issue_date)->format('d F Y')}}</span>
+                                        <span
+                                            class="relative text-xs">{{Date::parse($item->issue_date)->format('d F Y')}}</span>
                                     </span>
                                 </td>
-                                <td
-                                    class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
-                                    <button
-                                        class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">View
-                                        Details</button>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
+                                    <div x-data="{ modelOpen: false }">
+                                        <button wire:click="detail({{ $item->id }})" @click="modelOpen =!modelOpen"
+                                            class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">View
+                                            Details</button>
+                                        @include('frontend.invoice-detail')
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
+                                    <button wire:click="delete({{ $item->id }})" class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Delete</button>
                                 </td>
                             </tr>
                             @empty
-                                    
+                            <tr>
+                                <td>data no available</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>

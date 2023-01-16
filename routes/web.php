@@ -20,5 +20,5 @@ Route::get('/daftar-invoice', function () {
     return view('frontend.invoice');
 });
 Route::get('/form-invoice', function () {
-    return view('frontend.invoice-detail');
+    return view('frontend.invoice-form');
 });
