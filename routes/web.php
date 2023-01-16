@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/daftar-invoice', function () {
+    return view('frontend.invoice');
+});
+Route::get('/form-invoice', function () {
+    return view('frontend.invoice-detail');
+});

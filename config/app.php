@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Yudi1212\AutoNumber\AutoNumberServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -226,7 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Date' => Jenssegers\Date\Date::class,
     ],
 
 ];
